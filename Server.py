@@ -17,11 +17,16 @@ class ClientThread(Thread):
     def run(self):
         while True:
             if self.state == 'init':
-                
                 data = conn.recv(2048).decode()
                 players.append(Player(str(data)))
+                print(players)
+                self.state = 'getData'
             elif self.state == 'getData':
-                pass
+                recived = False
+                while recived == False:
+                    data = conn.recv(2048).decode()
+                    recived = True
+                    print(data)
             elif self.state == 'SendData':
                 pass
 ##            data = conn.recv(2048)
@@ -35,6 +40,8 @@ class Player:
         self.speed = 2
         self.type = 'crab'
         print("!!!PLAYER %s CREATED!!!"%self.name)
+    def move(self):
+        pass
 
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)

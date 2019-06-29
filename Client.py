@@ -11,4 +11,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     data = input('what is your player name: ')
     s.sendall(data.encode('utf-8'))
     while True:
-        pass
+        data = input("Command: ")
+        s.sendall(data.encode())

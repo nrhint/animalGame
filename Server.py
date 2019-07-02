@@ -27,11 +27,17 @@ class ClientThread(Thread):
                     data = conn.recv(2048).decode()
                     recived = True
                     print(data)
+                    if data == 'exit':
+                        break
             elif self.state == 'SendData':
                 pass
-##            data = conn.recv(2048)
+##            data = conn.sendall()
 ##            data = data.decode()
 ##            print(data)
+
+class AnimalMaster:
+    def __init__(self, posx, posy):
+        pass
 
 class Player:
     def __init__(self, name):
@@ -55,7 +61,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         (conn, (ip, port)) = s.accept()#addr = s.accept()
         newthread = ClientThread(ip, port)
         newthread.start()
-        threads.append(newthread)
+        #threads.append(newthread)
 '''    with conn:
         print('Connected by', addr)
         while True:
